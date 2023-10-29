@@ -1,10 +1,11 @@
-import { getApp, initializeApp } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import { Auth, getAuth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
 import { getMessaging, Messaging } from 'firebase/messaging';
 import { getStorage, FirebaseStorage } from 'firebase/storage';
 
 const env = import.meta.env;
+const appName = env['VITE_FIREBASE_NAME'];
 
 const firebaseConfig = {
   apiKey: env['VITE_FIREBASE_API_KEY'],
@@ -15,10 +16,7 @@ const firebaseConfig = {
   appId: env['VITE_FIREBASE_APP_ID'],
   measurementId: env['VITE_MEASUREMENT_ID'],
 };
-
-initializeApp(firebaseConfig, env['VITE_FIREBASE_NAME']);
-
-export const app = getApp();
+export const app = initializeApp(firebaseConfig, appName);
 export const auth: Auth = getAuth(app);
 export const store: Firestore = getFirestore(app);
 export const messaging: Messaging = getMessaging(app);
