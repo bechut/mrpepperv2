@@ -2,9 +2,9 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR uat
-'on': 
+'on':
   pull_request:
-    branches: 
+    branches:
       - uat
 
 jobs:
@@ -13,14 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: uat
     steps:
-      - name: Install firebase-tools
-        run: npm i -g firebase-tools
+      - uses: actions/checkout@v3
+      - run: npm i && npm i -g firebase-tools && npm run build
       - name: Choose environment
         run: npm run firebase-uat
-      - uses: actions/checkout@v3
-      - run: npm i && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_TODO_47999 }}'
-        
