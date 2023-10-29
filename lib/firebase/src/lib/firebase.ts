@@ -16,7 +16,7 @@ const firebaseConfig = {
   measurementId: env['VITE_MEASUREMENT_ID'],
 };
 
-initializeApp(firebaseConfig);
+initializeApp(firebaseConfig, env['VITE_FIREBASE_NAME']);
 
 export const app = getApp();
 export const auth: Auth = getAuth(app);
