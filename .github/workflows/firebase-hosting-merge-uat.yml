@@ -13,9 +13,11 @@ jobs:
     environment: uat
     steps:
       - uses: actions/checkout@v3
-      - run: npm i && npm run build
+      - run: npm i
       - name: Choose environment
-        run: firebase use uat
+        run: npm run firebase-uat
+      - name: Build
+        run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

@@ -6,7 +6,9 @@
     "start": "nx serve mrpepper",
     "build": "nx build mrpepper",
     "lint": "nx lint mrpepper",
-    "lib": "nx g @nx/react:lib"
+    "lib": "nx g @nx/react:lib",
+    "firebase-uat": "firebase use uat",
+    "firebase-prod": "firebase use prod"
   },
   "private": true,
   "dependencies": {
