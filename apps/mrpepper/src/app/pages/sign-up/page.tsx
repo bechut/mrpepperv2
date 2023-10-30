@@ -9,25 +9,22 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Form, Input, Space } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-
-export interface ISignup {
-  email: string;
-  username: string;
-  password: string;
-}
+import { useTranslation } from 'react-i18next';
+import { ISignUpPayload, ISignUpProps } from '@mrpepper/types';
 
 let clickCount = 0;
 
-const Page: React.FC<any> = () => {
+const Page: React.FC<ISignUpProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const authStates = useSelector(
     (states: RootState) => states.authSlice,
     shallowEqual
   );
-  const onSignup = (values: ISignup) => {
+  const onSignup = (values: ISignUpPayload) => {
     dispatch(thunks.auth.signup(values));
     clickCount = 1;
   };
@@ -59,7 +56,7 @@ const Page: React.FC<any> = () => {
           transform: 'translate(-50%,-50%)',
         }}
       >
-        <h2>Sign Up</h2>
+        <h2>{t('sign-up:form-title?sign_up')}</h2>
         <Form
           name="basic"
           onFinish={onSignup}
@@ -69,12 +66,12 @@ const Page: React.FC<any> = () => {
         >
           <Form.Item
             name="email"
-            label={'Email'}
+            label={t('sign-up:form-label?email')}
             rules={[
-              { required: true, message: 'Email is required' },
+              { required: true, message: t('sign-up:error-msg?email_empty') },
               {
                 type: 'email',
-                message: 'Invalid emal format',
+                message: t('sign-up:error-msg?email_invalid_format'),
               },
             ]}
           >
@@ -83,11 +80,11 @@ const Page: React.FC<any> = () => {
 
           <Form.Item
             name="username"
-            label={'Username'}
+            label={t('sign-up:form-label?username')}
             rules={[
               {
                 required: true,
-                message: 'Username is required',
+                message: t('sign-up:error-msg?username_empty'),
               },
             ]}
           >
@@ -96,7 +93,7 @@ const Page: React.FC<any> = () => {
 
           <Form.Item
             name="password"
-            label={'Password'}
+            label={t('sign-up:form-label?password')}
             rules={[
               {
                 required: true,
@@ -104,7 +101,7 @@ const Page: React.FC<any> = () => {
               },
               {
                 min: 8,
-                message: 'Password must be 8 characters at least',
+                message: t('sign-up:error-msg?password_length_8_characters'),
               },
             ]}
           >
@@ -112,7 +109,7 @@ const Page: React.FC<any> = () => {
           </Form.Item>
 
           <Button loading={authStates.loading} htmlType="submit" type="primary">
-            Sign up
+            {t('sign-up:form-button?sign_up')}
           </Button>
         </Form>
         <Space direction="vertical" style={{ margin: '8px 0' }}>
@@ -123,7 +120,7 @@ const Page: React.FC<any> = () => {
               type="link"
               icon={<ArrowLeftOutlined />}
             >
-              {'Log in'}
+              {t('log-in:form-button?log_in')}
             </Button>
           </Link>
         </Space>
