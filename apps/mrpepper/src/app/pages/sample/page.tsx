@@ -3,8 +3,9 @@ import { getAppInstance } from '@mrpepper/firebase';
 import { Button, Space } from 'antd';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, actions } from '../../../assets/redux/store';
+import { ISample } from '@mrpepper/types';
 
-const Page: React.FC<any> = () => {
+const Page: React.FC<ISample> = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const [firebaseConnected, setFirebaseConnected] = useState<boolean>(false);
