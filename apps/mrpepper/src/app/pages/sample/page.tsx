@@ -1,11 +1,13 @@
-import React from 'react';
-import { app } from '@mrpepper/firebase';
+import React, { useEffect, useState } from 'react';
+import { getAppInstance } from '@mrpepper/firebase';
 import { Button, Space } from 'antd';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, actions } from '../../../assets/redux/store';
 
 const Page: React.FC<any> = () => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const [firebaseConnected, setFirebaseConnected] = useState<boolean>(false);
 
   const onClick = () => {
     dispatch(
@@ -17,11 +19,18 @@ const Page: React.FC<any> = () => {
     );
   };
 
+  useEffect(() => {
+    getAppInstance().then(() => setFirebaseConnected(true));
+  }, []);
+
   return (
     <Space direction="vertical">
-      <div>Firebase: {app ? ' connected' : ' disconnected'}</div>
+      <div>Firebase: {firebaseConnected ? ' connected' : ' disconnected'}</div>
       <div>
-        Antd: <Button onClick={onClick} type="primary">Click</Button>
+        Antd:{' '}
+        <Button onClick={onClick} type="primary">
+          Click
+        </Button>
       </div>
     </Space>
   );
