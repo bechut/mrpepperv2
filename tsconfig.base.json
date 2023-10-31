@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@mrpepper/firebase": ["lib/firebase/src/index.ts"],
-      "@mrpepper/sample": ["lib/sample/src/index.ts"]
+      "@mrpepper/sample": ["lib/sample/src/index.ts"],
+      "@mrpepper/types": ["lib/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
