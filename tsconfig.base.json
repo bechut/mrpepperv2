@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@mrpepper/react-router": ["lib/react-router/src/index.ts"],
+      "@mrpepper/types": ["lib/types/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
