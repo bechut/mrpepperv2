@@ -2,7 +2,12 @@
   "name": "@mrpepper/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx serve mrpepper",
+    "build": "nx build mrpepper",
+    "lint": "nx lint mrpepper",
+    "lib": "nx g @nx/react:lib"
+  },
   "private": true,
   "dependencies": {
     "@swc/helpers": "~0.5.2",
