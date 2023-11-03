@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@mrpepper/react-router": ["lib/react-router/src/index.ts"],
+      "@mrpepper/redux": ["lib/redux/src/index.ts"],
       "@mrpepper/types": ["lib/types/src/index.ts"]
     }
   },
