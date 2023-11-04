@@ -6,13 +6,16 @@
     "start": "nx serve mrpepper",
     "build": "nx build mrpepper",
     "lint": "nx lint mrpepper",
-    "lib": "nx g @nx/react:lib"
+    "lib": "nx g @nx/react:lib",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@swc/helpers": "~0.5.2",
     "antd": "^5.10.3",
+    "firebase": "^10.5.2",
+    "husky": "^8.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.1.3",
