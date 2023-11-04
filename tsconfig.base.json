@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@mrpepper/firebase": ["lib/firebase/src/index.ts"],
       "@mrpepper/react-router": ["lib/react-router/src/index.ts"],
       "@mrpepper/redux": ["lib/redux/src/index.ts"],
       "@mrpepper/types": ["lib/types/src/index.ts"]
