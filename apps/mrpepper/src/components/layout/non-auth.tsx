@@ -7,6 +7,8 @@ import {
   pepperAppDispatch,
   pepperRootState,
 } from '@mrpepper/redux';
+import { useLocation } from 'react-router-dom';
+import { onChangeLanguage } from '../../assets/languages';
 
 const NonAuthLayout: FC<any> = ({ children }) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -15,6 +17,7 @@ const NonAuthLayout: FC<any> = ({ children }) => {
     shallowEqual
   );
   const dispatch = useDispatch<pepperAppDispatch>();
+  const location = useLocation();
 
   useEffect(() => {
     const {
@@ -29,6 +32,10 @@ const NonAuthLayout: FC<any> = ({ children }) => {
       dispatch(pepperActions.appSlice.resetAlert());
     }
   }, [appStates, dispatch, messageApi]);
+
+  useEffect(() => {
+    onChangeLanguage(location.pathname);
+  }, [location]);
 
   return (
     <div>

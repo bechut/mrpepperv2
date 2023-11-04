@@ -6,6 +6,7 @@ import { ISampleProps } from '@mrpepper/types';
 import { pepperActions, pepperRootState } from '@mrpepper/redux';
 import NonAuthLayout from '../../components/layout/non-auth';
 import { getAppInstance } from '@mrpepper/firebase';
+import { useTranslation } from 'react-i18next';
 
 const { Text } = Typography;
 
@@ -15,14 +16,13 @@ const Page: FC<ISampleProps> = (props) => {
     shallowEqual
   );
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    console.log(
-      appStates,
-      getAppInstance()
-        .then((x) => console.log('Firebase connected successfully'))
-        .then((x) => console.log('Firebase disconnected'))
-    );
+    console.log(appStates);
+    getAppInstance()
+      .then(() => console.log('Firebase connected successfully'))
+      .catch((e) => console.log('Firebase disconnected', e));
     dispatch(
       pepperActions.appSlice.setAlert({ message: 'sample', status: true })
     );
@@ -32,8 +32,10 @@ const Page: FC<ISampleProps> = (props) => {
     <NonAuthLayout>
       <Layout style={{ height: '100vh' }}>
         <Space direction="vertical">
-          <Text>Sample Page</Text>
-          <Text>Locale: {props.locale} </Text>
+          <Text>{t('sample:title?sample')}</Text>
+          <Text>
+            {t('sample:button-label?change_lang')}: {props.locale}
+          </Text>
           <Button type="primary">Testing</Button>
         </Space>
       </Layout>
