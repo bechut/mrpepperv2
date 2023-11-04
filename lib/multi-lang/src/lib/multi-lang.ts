@@ -23,7 +23,7 @@ export function initI18Next(en: ILocale, vi: ILocale) {
         translation: vi,
       },
     },
-    parseMissingKeyHandler: (key) => {
+    parseMissingKeyHandler: (key: string) => {
       return key
         .split('?')[1]
         .split('_')
