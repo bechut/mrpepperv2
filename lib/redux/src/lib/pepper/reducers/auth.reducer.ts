@@ -70,27 +70,27 @@ export const thunkSignUp = createAsyncThunk(
       .then(async () => await signOut(auth))
       .then(() => ({
         status: true,
-        message: lang.t('sign-up:success-msg?create_account_success'),
+        // message: lang.t('sign-up:success-msg?create_account_success'),
       }))
       .catch((e) => {
         if (auth.currentUser) deleteUser(auth.currentUser);
-        const msg: { [key: string]: string } = {
-          'Firebase: Error (auth/email-already-in-use).': lang.t(
-            'sign-up:error-msg?email_in_use'
-          ),
-          'auth/invalid-email': lang.t(
-            'sign-up:error-msg?email_invalid_format'
-          ),
-        };
+        // const msg: { [key: string]: string } = {
+        //   'Firebase: Error (auth/email-already-in-use).': lang.t(
+        //     'sign-up:error-msg?email_in_use'
+        //   ),
+        //   'auth/invalid-email': lang.t(
+        //     'sign-up:error-msg?email_invalid_format'
+        //   ),
+        // };
         throw new Error(
-          JSON.stringify({
-            status: false,
-            message:
-              msg[e.message] ||
-              msg[e.code] ||
-              e.messasge ||
-              lang.t('sign-up:error-msg?unknow'),
-          })
+          // JSON.stringify({
+          //   status: false,
+          //   message:
+          //     msg[e.message] ||
+          //     msg[e.code] ||
+          //     e.messasge ||
+          //     lang.t('sign-up:error-msg?unknow'),
+          // })
         );
       });
   }
