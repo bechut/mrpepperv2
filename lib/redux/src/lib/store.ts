@@ -11,12 +11,12 @@ export class configStoreRedux<TReducer, TAction> {
 
   constructor(slices: Slice[]) {
     this.reducers = slices.reduce(
-      (a, slice) => ({ [slice.name]: slice.reducer }),
+      (a, slice) => ({ ...a, [slice.name]: slice.reducer }),
       {}
     );
 
     this.actions = slices.reduce(
-      (a, slice) => ({ [slice.name]: slice.actions }),
+      (a, slice) => ({ ...a, [slice.name]: slice.actions }),
       {}
     );
   }
