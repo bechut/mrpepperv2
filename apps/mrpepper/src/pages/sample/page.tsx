@@ -5,6 +5,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { ISampleProps } from '@mrpepper/types';
 import { pepperActions, pepperRootState } from '@mrpepper/redux';
 import NonAuthLayout from '../../components/layout/non-auth';
+import { getAppInstance } from '@mrpepper/firebase';
 
 const { Text } = Typography;
 
@@ -16,7 +17,12 @@ const Page: FC<ISampleProps> = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(appStates)
+    console.log(
+      appStates,
+      getAppInstance()
+        .then((x) => console.log('Firebase connected successfully'))
+        .then((x) => console.log('Firebase disconnected'))
+    );
     dispatch(
       pepperActions.appSlice.setAlert({ message: 'sample', status: true })
     );
