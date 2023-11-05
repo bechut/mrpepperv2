@@ -1,13 +1,14 @@
-import { FC, lazy } from 'react';
+import { FC, lazy, useEffect } from 'react';
 import { Button, Card, Form, Space, Typography } from 'antd';
 import { ISignUpProps, ISignUpPayload } from '@mrpepper/types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import NonAuthLayout from '../../components/layout/non-auth';
-import { shallowEqual, useSelector } from 'react-redux';
-import { pepperRootState } from '@mrpepper/redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { pepperAppDispatch, pepperRootState } from '@mrpepper/redux';
+import { signupAsync } from './fetch';
 
+const NonAuthLayout = lazy(() => import('../../components/layout/non-auth'));
 const EmailInput = lazy(() => import('../../components/form/email-input'));
 const UsernameInput = lazy(
   () => import('../../components/form/username-input')
@@ -23,12 +24,18 @@ const Page: FC<ISignUpProps> = (props) => {
     (states: pepperRootState) => states.authSlice,
     shallowEqual
   );
+  const dispatch = useDispatch<pepperAppDispatch>();
+  const navigate = useNavigate();
 
   const onSignup = (values: ISignUpPayload) => {
-    console.log(values);
-    // dispatch(thunks.auth.signup(values));
-    // clickCount = 1;
+    dispatch(signupAsync(values));
   };
+
+  useEffect(() => {
+    if (authStates.success) {
+      navigate(`/${props.locale}/login`);
+    }
+  });
 
   return (
     <NonAuthLayout>
@@ -84,8 +91,7 @@ const Page: FC<ISignUpProps> = (props) => {
               htmlType="submit"
               type="primary"
             >
-              Sign up
-              {/* {t('sign-up:form-button?sign_up')} */}
+              {t('sign-up:form-title?sign_up')}
             </Button>
           </Form>
           <Space direction="vertical" style={{ margin: '8px 0' }}>
@@ -96,8 +102,7 @@ const Page: FC<ISignUpProps> = (props) => {
                 type="link"
                 icon={<ArrowLeftOutlined />}
               >
-                {/* {t('log-in:form-button?log_in')} */}
-                Log in
+                {t('log-in:form-button?log_in')}
               </Button>
             </Link>
           </Space>
