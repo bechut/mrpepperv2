@@ -21,7 +21,12 @@ const Page: FC<ISampleProps> = (props) => {
   useEffect(() => {
     console.log(appStates);
     getAppInstance()
-      .then(() => console.log('Firebase connected successfully'))
+      .then(() =>
+        console.log(
+          'Firebase connected successfully',
+          import.meta.env['VITE_FIREBASE_NAME']
+        )
+      )
       .catch((e) => console.log('Firebase disconnected', e));
     dispatch(
       pepperActions.appSlice.setAlert({ message: 'sample', status: true })
