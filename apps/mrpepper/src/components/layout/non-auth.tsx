@@ -10,6 +10,7 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import { languages, onChangeLanguage } from '../../assets/languages';
 import { GlobalOutlined } from '@ant-design/icons';
+import versioning from '../../assets/versioning';
 
 const NonAuthLayout: FC<any> = ({ children }) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -42,7 +43,11 @@ const NonAuthLayout: FC<any> = ({ children }) => {
     <div>
       {contextHolder}
       {children}
-      <FloatButton.Group icon={<GlobalOutlined />} trigger="hover">
+      <FloatButton.Group
+        icon={<GlobalOutlined />}
+        trigger="hover"
+        badge={{ count: versioning[versioning.length - 1], color: '#7474f6' }}
+      >
         {Object.keys(languages).map((locale: string) => (
           <Link
             key={locale}
