@@ -1,8 +1,9 @@
 import { configStoreRedux } from '../store';
 import appSlice from './reducers/app.reducer';
 import { IActions, IStates } from './reducers';
+import authSlice from './reducers/auth.reducer';
 
-const initStore = new configStoreRedux<IStates, IActions>([appSlice]);
+const initStore = new configStoreRedux<IStates, IActions>([appSlice, authSlice]);
 
 export const pepperStore = initStore.getStore();
 export const pepperActions = initStore.getActions();
