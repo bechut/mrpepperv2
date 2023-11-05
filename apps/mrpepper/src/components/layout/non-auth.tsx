@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { message } from 'antd';
+import { FloatButton, message } from 'antd';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {
@@ -7,8 +7,9 @@ import {
   pepperAppDispatch,
   pepperRootState,
 } from '@mrpepper/redux';
-import { useLocation } from 'react-router-dom';
-import { onChangeLanguage } from '../../assets/languages';
+import { Link, useLocation } from 'react-router-dom';
+import { languages, onChangeLanguage } from '../../assets/languages';
+import { GlobalOutlined } from '@ant-design/icons';
 
 const NonAuthLayout: FC<any> = ({ children }) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -41,6 +42,19 @@ const NonAuthLayout: FC<any> = ({ children }) => {
     <div>
       {contextHolder}
       {children}
+      <FloatButton.Group icon={<GlobalOutlined />} trigger="hover">
+        {Object.keys(languages).map((locale: string) => (
+          <Link
+            key={locale}
+            to={window.location.pathname.replace(
+              window.location.pathname.slice(1, 3),
+              locale
+            )}
+          >
+            <FloatButton icon={locale} />
+          </Link>
+        ))}
+      </FloatButton.Group>
     </div>
   );
 };
