@@ -7,6 +7,7 @@ import { pepperActions, pepperRootState } from '@mrpepper/redux';
 import NonAuthLayout from '../../components/layout/non-auth';
 import { getAppInstance } from '@mrpepper/firebase';
 import { useTranslation } from 'react-i18next';
+import { ConfigMoment, IFormat, format } from '@mrpepper/moment';
 
 const { Text } = Typography;
 
@@ -17,6 +18,7 @@ const Page: FC<ISampleProps> = (props) => {
   );
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const m = new ConfigMoment(props.locale);
 
   useEffect(() => {
     console.log(appStates);
@@ -42,6 +44,18 @@ const Page: FC<ISampleProps> = (props) => {
             {t('sample:button-label?change_lang')}: {props.locale}
           </Text>
           <Button type="primary">Testing</Button>
+          <>
+            Moment JS
+            {Object.keys(format).map((key) => (
+              <div>
+                <strong>{key}</strong>:{' '}
+                {m.dateToString(new Date(), key as IFormat)}
+              </div>
+            ))}
+            <Space>
+              <strong>{'ISO'}</strong>: {m.dateToISOString(new Date())}
+            </Space>
+          </>
         </Space>
       </Layout>
     </NonAuthLayout>
