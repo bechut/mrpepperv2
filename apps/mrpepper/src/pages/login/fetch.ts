@@ -8,6 +8,7 @@ import {
 import { User, UserCredential } from 'firebase/auth';
 import { lang } from '../../assets/languages';
 import { DocumentSnapshot } from 'firebase/firestore';
+import { ConfigMoment } from '@mrpepper/moment';
 
 export const loginAsync = createAsyncThunk(
   'signup',
@@ -21,9 +22,11 @@ export const loginAsync = createAsyncThunk(
       'firebase/firestore'
     );
     const { signInWithEmailAndPassword } = await import('firebase/auth');
+    const m = new ConfigMoment('en');
 
     return signInWithEmailAndPassword(auth, email, password)
       .then(({ user }: UserCredential) => {
+        console.log(user);
         if (!user.emailVerified) {
           throw new Error(lang.t('login:error-msg?email_not_verified'));
         }
@@ -63,7 +66,7 @@ export const loginAsync = createAsyncThunk(
             messagingToken: token,
             ua: window.navigator.userAgent,
             ip,
-            // expired: moment().add(1, 'hour').toDate(),
+            expired: m.add(new Date(), 'hour', 1).toDate(),
             user: doc(store, 'users', user.uid),
           };
           if (session.exists) {
@@ -76,7 +79,7 @@ export const loginAsync = createAsyncThunk(
       )
       .then(() => ({
         status: true,
-        message: lang.t('log-in:success-msg?login_success'),
+        message: lang.t('login:success-msg?login_success'),
       }))
       .catch((e) => {
         const msg: { [key: string]: string } = {
@@ -84,16 +87,17 @@ export const loginAsync = createAsyncThunk(
             'sign-up:error-msg?email_invalid_format'
           ),
           'auth/invalid-login-credentials': lang.t(
-            'sign-up:error-msg?pasword_invalid'
+            'login:error-msg?pasword_invalid'
           ),
         };
+
         throw new Error(
           JSON.stringify({
             status: false,
             message:
               msg[e.message] ||
               msg[e.code] ||
-              e.messasge ||
+              e.message ||
               lang.t('sign-up:error-msg?unknow'),
           })
         );

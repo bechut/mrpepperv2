@@ -3,9 +3,10 @@ import { Form, Card, Typography, Button, Space } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { ILoginProps } from '@mrpepper/types';
+import { ILoginPayload, ILoginProps } from '@mrpepper/types';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { pepperAppDispatch, pepperRootState } from '@mrpepper/redux';
+import { loginAsync } from './fetch';
 
 const NonAuthLayout = lazy(() => import('../../components/layout/non-auth'));
 const EmailInput = lazy(() => import('../../components/form/email-input'));
@@ -22,8 +23,8 @@ const Page: FC<ILoginProps> = (props) => {
   );
   const dispatch = useDispatch<pepperAppDispatch>();
 
-  const onLogin = () => {
-    //
+  const onLogin = (values: ILoginPayload) => {
+    dispatch(loginAsync({ ...values, ip: '' }));
   };
 
   return (
@@ -75,7 +76,7 @@ const Page: FC<ILoginProps> = (props) => {
             </Button>
           </Form>
           <Space direction="vertical" style={{ margin: '8px 0' }}>
-            <Link to={`/en/login`}>
+            <Link to={`/${props.locale}/signup`}>
               <Button
                 loading={authStates.loading}
                 htmlType="button"
