@@ -7,13 +7,14 @@
     "build": "nx build mrpepper",
     "lint": "nx lint mrpepper",
     "lib": "nx g @nx/react:lib",
-    "test-lib": "nx run-many --no-cache --target=test -p=router --coverage --coverageReporters=lcov --watch",
+    "test-lib": "nx run-many --no-cache --target=test -p=router,firebase --coverage --coverageReporters=lcov --watch",
     "test-app": "nx test mrpepper --coverage"
   },
   "private": true,
   "dependencies": {
     "@swc/helpers": "~0.5.2",
     "antd": "^5.11.0",
+    "firebase": "^10.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.18.0",

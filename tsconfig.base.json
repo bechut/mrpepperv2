@@ -15,9 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@mrpepper/app": ["apps/mrpepper/src/app/app.tsx"],
+      "@mrpepper/firebase": ["lib/firebase/src/index.ts"],
       "@mrpepper/router": ["lib/router/src/index.ts"],
-      "@mrpepper/types": ["lib/types/src/index.ts"],
-      "@mrpepper/app": ["apps/mrpepper/src/app/app.tsx"]
+      "@mrpepper/types": ["lib/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
