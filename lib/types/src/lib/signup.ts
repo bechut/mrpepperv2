@@ -1,4 +1,4 @@
-import { ILocale } from "./router";
+import { ILocale } from './router';
 
 export interface ISignUpPayload {
   email: string;
@@ -8,4 +8,35 @@ export interface ISignUpPayload {
 
 export interface ISignUpProps extends ILocale {
   email?: string;
+}
+
+export interface IInputProps {
+  label: string;
+  placeholder?: string;
+}
+
+export interface IEmailInputProps extends IInputProps {
+  msg: {
+    error: {
+      required: string;
+      invalid: string;
+    };
+  };
+}
+
+export interface IUsernameInputProps extends IInputProps {
+  msg: {
+    error: {
+      required: string;
+    };
+  };
+}
+
+export interface IPasswordInputProps extends IInputProps {
+  msg: {
+    error: {
+      required: string;
+      len: string;
+    };
+  };
 }
