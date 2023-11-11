@@ -1,12 +1,12 @@
 import { IRoutes } from '@mrpepper/types';
 import { lazy } from 'react';
 
-const App = lazy(() => import('../../app/app'));
+const sample = lazy(() => import('../../pages/sample/page'));
 
 export const routes: IRoutes[] = [
   {
     path: 'sample',
-    element: App,
+    element: sample,
   },
 ];
 

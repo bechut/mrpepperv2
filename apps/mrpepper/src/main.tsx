@@ -5,8 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Routers } from '@mrpepper/router';
 import { locales, routes } from './assets/routes';
 
-console.log(routes)
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
