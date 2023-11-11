@@ -7,6 +7,8 @@ import { lazy } from 'react';
 
 // eslint-disable-next-line @nx/enforce-module-boundaries
 const Test = lazy(() => import('./test'));
+// eslint-disable-next-line @nx/enforce-module-boundaries
+const App = lazy(() => import('../../../../apps/mrpepper/src/components/app/'));
 
 jest.mock('react-router-dom', () => {
   // Require the original module to not be mocked...
@@ -31,10 +33,13 @@ const mockRoutes: IRoutes[] = [
 const mockLocales: string[] = ['en', 'vi'];
 
 describe('Router', () => {
+  const extra = {
+    Component: App,
+  };
   it('should render successfully', () => {
     const { baseElement } = render(
       <BrowserRouter>
-        <Routers routes={[]} locales={[]} />
+        <Routers routes={[]} locales={[]} extra={extra} />
       </BrowserRouter>
     );
     expect(baseElement).toBeTruthy();
@@ -43,7 +48,7 @@ describe('Router', () => {
   it('should render routes successfully with params', () => {
     const { baseElement } = render(
       <BrowserRouter>
-        <Routers routes={mockRoutes} locales={mockLocales} />
+        <Routers routes={mockRoutes} locales={mockLocales} extra={extra} />
       </BrowserRouter>
     );
     expect(baseElement).toBeTruthy();
