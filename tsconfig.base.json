@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@mrpepper/router": ["lib/router/src/index.ts"],
+      "@mrpepper/types": ["lib/types/src/index.ts"],
+      "@mrpepper/app": ["apps/mrpepper/src/app/app.tsx"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
