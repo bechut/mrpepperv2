@@ -4,9 +4,9 @@ import { ISignUpProps, ISignUpPayload } from '@mrpepper/types';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-// import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-// import { pepperAppDispatch, pepperRootState } from '@mrpepper/redux';
-// import { signupAsync } from './fetch';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { appDispatch, rootState } from '../../assets/redux';
+import { signupAsync } from './fetch';
 
 const EmailInput = lazy(() => import('../../components/form/email-input'));
 const UsernameInput = lazy(
@@ -19,23 +19,22 @@ const PasswordInput = lazy(
 const Page: FC<ISignUpProps> = (props) => {
   const [form] = Form.useForm();
   const { t } = useTranslation();
-  // const authStates = useSelector(
-  //   (states: pepperRootState) => states.authSlice,
-  //   shallowEqual
-  // );
-  // const dispatch = useDispatch<pepperAppDispatch>();
+  const authStates = useSelector(
+    (states: rootState) => states.authSlice,
+    shallowEqual
+  );
+  const dispatch = useDispatch<appDispatch>();
   const navigate = useNavigate();
 
   const onSignup = (values: ISignUpPayload) => {
-    console.log(values);
-    // dispatch(signupAsync(values));
+    dispatch(signupAsync(values));
   };
 
-  // useEffect(() => {
-  //   if (authStates.success) {
-  //     navigate(`/${props.locale}/login`);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (authStates.success) {
+      navigate(`/${props.locale}/login`);
+    }
+  }, [authStates.success]);
 
   return (
     <div style={{ height: '100vh', position: 'relative' }}>
@@ -90,7 +89,7 @@ const Page: FC<ISignUpProps> = (props) => {
           />
 
           <Button
-            // loading={authStates.loading}
+            loading={authStates.loading}
             htmlType="submit"
             type="primary"
           >
@@ -100,7 +99,7 @@ const Page: FC<ISignUpProps> = (props) => {
         <Space direction="vertical" style={{ margin: '8px 0' }}>
           <Link to={`/en/login`}>
             <Button
-              // loading={authStates.loading}
+              loading={authStates.loading}
               htmlType="button"
               type="link"
               icon={<ArrowLeftOutlined />}
