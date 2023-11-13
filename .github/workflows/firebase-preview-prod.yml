@@ -23,6 +23,7 @@ jobs:
       VITE_MESSAGE_ID: ${{ secrets.MESSAGE_ID }}
       VITE_BACKEND_URL: ${{ secrets.BACKEND_URL }}
       VITE_FIREBASE_NAME": ${{ secrets.FIREBASE_NAME }}
+      VITE_VERSIONING": ${{ secrets.FIREBASE_VERSIONING }}
     steps:
       - uses: actions/checkout@v3
       - run: npm i &&  npm run build
