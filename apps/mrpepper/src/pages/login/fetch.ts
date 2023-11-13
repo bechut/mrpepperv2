@@ -29,7 +29,9 @@ export const loginAsync = createAsyncThunk(
     const store = await getFirestoreInstance(config);
     const messaging = await getMessagingInstance(config);
     const { getToken } = await import('firebase/messaging');
-    const { updateDoc, doc, getDoc, setDoc } = await import('firebase/firestore');
+    const { updateDoc, doc, getDoc, setDoc } = await import(
+      'firebase/firestore'
+    );
     const { signInWithEmailAndPassword } = await import('firebase/auth');
 
     return signInWithEmailAndPassword(auth, email, password)
@@ -67,12 +69,15 @@ export const loginAsync = createAsyncThunk(
           token: string;
           session: any;
         }) => {
+          const { ConfigMoment } = await import('@mrpepper/moment');
+          const m = new ConfigMoment();
+
           const payload = {
             email: user.email,
             token: user.refreshToken,
             messagingToken: token,
             ua: window.navigator.userAgent,
-            // expired: m.add(new Date(), 'hour', 1).toDate(),
+            expired: m.add(new Date(), 'hour', 1).toDate(),
             user: doc(store, 'users', user.uid),
           };
           if (session.exists) {
@@ -89,9 +94,7 @@ export const loginAsync = createAsyncThunk(
       }))
       .catch((e) => {
         const msg: { [key: string]: string } = {
-          'auth/invalid-email': lang.t(
-            'sign-up:form-err-msg?email_invalid'
-          ),
+          'auth/invalid-email': lang.t('sign-up:form-err-msg?email_invalid'),
           'auth/invalid-login-credentials': lang.t(
             'login:form-err-msg?password_invalid'
           ),
