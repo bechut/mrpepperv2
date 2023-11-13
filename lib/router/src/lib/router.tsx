@@ -8,13 +8,13 @@ export const Routers: FC<{
   locales: string[];
   extra: IRoutesExtra;
 }> = ({ routes, locales, extra }) => {
+  const Component = extra.Component;
   return (
     <Routes>
       {routes.map((route, index) => (
         <Fragment key={index}>
           {locales.map((locale: string) => {
             const Elem = route.element;
-            const Component = extra.Component;
 
             return (
               <Route
@@ -33,16 +33,18 @@ export const Routers: FC<{
       <Route
         path={'*'}
         element={
-          <Result
-            status="404"
-            title="404"
-            subTitle="Sorry, the page you visited does not exist."
-            extra={
-              <Link to={'/en/'}>
-                <Button type="primary">Back Home</Button>
-              </Link>
-            }
-          />
+          <Component>
+            <Result
+              status="404"
+              title="404"
+              subTitle="Sorry, the page you visited does not exist."
+              extra={
+                <Link to={'/en/'}>
+                  <Button type="primary">Back Home</Button>
+                </Link>
+              }
+            />
+          </Component>
         }
       />
     </Routes>
