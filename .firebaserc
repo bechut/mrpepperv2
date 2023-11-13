@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "app-todo-47999",
+    "uat": "app-todo-47999",
+    "prod": "app-todo-prod"
+  }
+}
