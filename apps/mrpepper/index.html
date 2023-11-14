@@ -12,5 +12,19 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        const env = '%VITE_FIREBASE_NAME%';
+        const swPath = env === 'uat' ? `/uat-sw.js` : `/prod-sw.js`;
+        navigator.serviceWorker
+          .register(swPath)
+          .then((registration) => {
+            console.log('Service worker registered:', registration);
+          })
+          .catch((error) => {
+            console.log('Service worker registration failed:', error);
+          });
+      }
+    </script>
   </body>
 </html>
