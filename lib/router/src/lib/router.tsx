@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { Fragment, FC } from 'react';
 import { IRoutes, IRoutesExtra } from '@mrpepper/types';
 import { Result, Button } from 'antd';
@@ -30,6 +30,7 @@ export const Routers: FC<{
           })}
         </Fragment>
       ))}
+      <Route path="/" element={<Navigate to="/en" />} />
       <Route
         path={'*'}
         element={
