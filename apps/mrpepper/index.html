@@ -15,7 +15,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         const env = '%VITE_FIREBASE_NAME%';
-        const swPath = env === 'uat' ? `/uat-sw.js` : `/prod-sw.js`;
+        const swPath = env === 'uat' ? `./uat-sw.js` : `./prod-sw.js`;
         navigator.serviceWorker
           .register(swPath)
           .then((registration) => {
