@@ -97,14 +97,14 @@ const Page: FC<ISignUpProps> = (props) => {
           </Button>
         </Form>
         <Space direction="vertical" style={{ margin: '8px 0' }}>
-          <Link to={`/en/login`}>
+          <Link to={`/${props.locale}/login`}>
             <Button
               loading={authStates.loading}
               htmlType="button"
               type="link"
               icon={<ArrowLeftOutlined />}
             >
-              {t('log-in:form-button?log_in')}
+              {t('login:form-button?log_in')}
             </Button>
           </Link>
         </Space>
